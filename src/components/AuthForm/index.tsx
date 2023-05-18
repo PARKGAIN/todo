@@ -1,7 +1,7 @@
 import { AuthFormContainer, StyledInput } from "./style";
 import { AuthFormProps } from "../../types/type";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { login, signup } from "../../apis/auth";
 
@@ -12,7 +12,7 @@ const textMap: Record<string, string> = {
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const text = textMap[type];
-
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     id: "",
     password: "",
@@ -42,12 +42,13 @@ const AuthForm = ({ type }: AuthFormProps) => {
       }
       if (type === "login") {
         login(inputValue);
+        navigate("/todo");
       } else if (type === "register" && !mismatchError) {
         signup(inputValue);
         setSignUpSuccess(true);
       }
     },
-    [inputValue.id, inputValue.password, mismatchError, type]
+    [inputValue, mismatchError]
   );
 
   return (
