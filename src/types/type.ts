@@ -3,6 +3,11 @@ export type AuthFormProps = {
 }
 
 export type ButtonProps = {
-    backgroundColor: string;
     children: React.ReactNode;
+    type?:"button" |"submit"
   };
+
+export type UserInput = {
+    id: string;
+    password: string;
+  }

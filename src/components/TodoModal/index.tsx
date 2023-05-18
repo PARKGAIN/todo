@@ -2,7 +2,7 @@ import Modal from "../Modal";
 
 interface Props {
   show: boolean;
-  onCloseModal: any;
+  onCloseModal: () => void;
 }
 
 const TodoModal = ({ show, onCloseModal }: Props) => {

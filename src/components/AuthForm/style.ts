@@ -13,3 +13,7 @@ export const StyledInput = styled.input`
   & + & {
     margin-top: 1rem;
   }`;
+
+export const AuthFormContainer= styled.div`
+ width: 50%
+ `

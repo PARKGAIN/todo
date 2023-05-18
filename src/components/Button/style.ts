@@ -1,11 +1,7 @@
 import { styled } from "styled-components";
 
-interface ButtonProps {
-  backgroundColor: string;
-}
-
-export const StyledButton = styled.button<ButtonProps>`
-  background-color: ${(props: { backgroundColor: string; }) => props.backgroundColor};
-  color: ${(props: { backgroundColor: string; }) =>
-    props.backgroundColor === "black" ? "white" : "black"};
+export const StyledButton = styled.button`
+  width: 400px;
+  height: 30px;
+  line-height: 28px;
 `;
