@@ -1,4 +1,4 @@
-const AuthTemplate = ({ childern }) => {
+const AuthTemplate = ({ children }: React.PropsWithChildren) => {
   return <div>{children}</div>;
 };
 
