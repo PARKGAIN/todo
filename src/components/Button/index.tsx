@@ -1,8 +1,16 @@
 import { ButtonProps } from "../../types/type";
 import { StyledButton } from "./style";
 
-const Button: React.FC<ButtonProps> = ({ children, type = "button" }) => {
-  return <StyledButton type={type}>{children}</StyledButton>;
+const Button: React.FC<ButtonProps & { onClick: () => void }> = ({
+  children,
+  type = "button",
+  onClick,
+}) => {
+  return (
+    <StyledButton type={type} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

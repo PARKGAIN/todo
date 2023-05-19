@@ -11,11 +11,27 @@ export const loadTodos = async ()=>{
              console.error(error)
 }}
 
-export const createTodo=async () => {
+export const createTodo= async () => {
     try {
         await axiosInstance.post('/todo')
     } catch (error) {
         console.error(error)
+    }
+}
+
+export const updateTodo = async () => {
+    try {
+        await axiosInstance.put('/todo')
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const deleteTodo = async () => {
+    try {
+        await axiosInstance.delete('/todo')
+    } catch (error) {
+        console.error(error);
     }
 }
 

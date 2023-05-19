@@ -36,6 +36,11 @@ export const signup= async(userInput:UserInput)=>{
             console.log('회원가입 실패');
           }
     } catch (error) {
-        console.error(error)
+        console.error(error);
+        if (error instanceof AxiosError) {
+          if (error?.response?.status === 403) {
+            alert('다시 회원가입 해주세요.');
+          }
+        }
     }
 }
