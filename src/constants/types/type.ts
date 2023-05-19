@@ -5,9 +5,17 @@ export type AuthFormProps = {
 export type ButtonProps = {
     children: React.ReactNode;
     type?:"button" |"submit"
-  };
+}
 
 export type UserInput = {
     id: string;
     password: string;
-  }
+}
+
+export type Todos={
+  id:number;
+  text:string;
+  images?:string[];
+  checked:boolean;
+  createdat:string;
+}

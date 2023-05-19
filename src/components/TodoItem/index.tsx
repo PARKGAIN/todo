@@ -1,14 +1,11 @@
+import { Todos } from "../../constants/types/type";
 import Checkbox from "../Checkbox";
 import { Item } from "./style";
 
-const TodoItem = () => {
+const TodoItem = (todos: Todos[]) => {
   return (
     <Item>
       <Checkbox />
-      <div>
-        <button>수정</button>
-        <button>삭제</button>
-      </div>
     </Item>
   );
 };
