@@ -1,12 +1,8 @@
-import { ReactNode, useCallback } from "react";
+import { useCallback } from "react";
+import { ModalProps } from "../../constants/interfaces/interfaces";
 import { CreateModal, CloseModalButton } from "./style";
 
-interface Props {
-  show: boolean;
-  onCloseModal: () => void;
-  children: ReactNode;
-}
-const Modal = ({ show, children, onCloseModal }: Props) => {
+const Modal = ({ show, children, onCloseModal }: ModalProps) => {
   const stopPropagation = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
   }, []);

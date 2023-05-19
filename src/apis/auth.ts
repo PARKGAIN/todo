@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import { UserInput } from "../types/type";
-import { axiosInstance } from "../utils/axiosInstance";
+import { UserInput } from "../constants/types/type";
+import { axiosInstance } from "../constants/axiosInstance";
 
 export const login = async (userInput:UserInput) => {
     try{

@@ -1,47 +1,46 @@
-import { useState } from "react";
-import { createTodo } from "../../apis/todo";
+import { useState, useEffect } from "react";
+import { createTodo, uploadImages } from "../../apis/todo";
+import { AddTodoProps } from "../../constants/interfaces/interfaces";
 import Button from "../Button";
 import Modal from "../Modal";
-import { StyledTextArea } from "./style";
-
-interface AddTodoProps {
-  show: boolean;
-  onCloseModal: () => void;
-}
+import { ImgInput, StyledTextArea } from "./style";
 
 const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
-  const [file, setFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [text, setText] = useState("");
+  const [imgFiles, setImgFiles] = useState<File | null>(null);
+  const [checked, setChecked] = useState(false);
+  const [previewImg, setPreviewImg] = useState("");
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
+  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
     if (selectedFile) {
-      setFile(selectedFile);
+      setImgFiles(selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
-        setPreviewUrl(reader.result as string);
+        setPreviewImg(reader.result as string);
       };
       reader.readAsDataURL(selectedFile);
     }
   };
 
-  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-  };
+  useEffect(() => {
+    if (imgFiles) {
+      uploadImages(imgFiles).then((data) => {
+        console.dir(data);
+      });
+    }
+  }, [imgFiles]);
 
   const handleCreateTodo = async () => {
     if (!text) {
       alert("내용을 입력해주세요.");
       return;
     }
-    const formData = new FormData();
-    formData.append("text", text);
-    if (file) {
-      formData.append("file", file);
-    }
     try {
-      await createTodo({ text: text, checked: false, images: [""] });
       onCloseModal();
     } catch (error) {
       console.error(error);
@@ -57,13 +56,15 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
         value={text}
         onChange={handleTextChange}
       />
-      <input
+      <ImgInput
         type="file"
-        accept="image/*"
+        accept="img/*"
         onChange={handleFileChange}
         id="img"
       />
-      {previewUrl && <img height={30} src={previewUrl} alt="미리보기" />}
+      {previewImg && (
+        <img width={200} height={250} src={previewImg} alt="미리보기" />
+      )}
       <label htmlFor="img">사진 첨부하기</label>
       <Button onClick={handleCreateTodo}>작성완료</Button>
     </Modal>

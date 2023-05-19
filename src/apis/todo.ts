@@ -1,20 +1,44 @@
-import { axiosInstance } from "../utils/axiosInstance";
-
-
-axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('jwt');
+import { axiosInstance, headers } from "../constants/axiosInstance";
 
 export const loadTodos = async ()=>{ 
     try{
-        const response =await axiosInstance.get('/todos');
+        const response =await axiosInstance.get('/todos',{headers:headers});
         const {message,todos}= response.data;
          return todos;
         } catch(error){
              console.error(error)
 }}
 
-export const createTodo= async (newTodo:any) => {
+export const uploadImages = async ( images: File) => {
     try {
-        await axiosInstance.post('/todo',newTodo)
+      const imageheader = {
+        'accesstoken': localStorage.getItem('jwt'),
+        'Content-Type': 'multipart/form-data'
+      };
+        const formData = new FormData();
+        formData.append('images', images);
+
+        const response =await axiosInstance.post('/images',formData,{headers:imageheader});
+        const {message, imageUrls}= response.data;
+        if(message ==='성공'){
+          return imageUrls;
+        } else if(message==='실패'){
+          alert('이미지를 등록하는데 실패하였습니다')
+        }
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+export const createTodo= async (text:string, checked:boolean, images:string[]|null|File) => {
+    try {
+        const newTodo = {
+            text: text,
+            checked: checked,
+            images: images
+          };
+        await axiosInstance.post('/todo',newTodo,{headers:headers})
     } catch (error) {
         console.error(error)
     }
@@ -35,13 +59,3 @@ export const deleteTodo = async () => {
         console.error(error);
     }
 }
-
-// axiosInstance.interceptors.request.use(req=>{
-//     const token =localStorage.getItem('jwt');
-//     const navigate= useNavigate();
-//     if(!token){
-//         navigate('/login')
-//     }
-//         return req;
-// })
-// 이 부분 삭제할까?

@@ -1,5 +1,5 @@
 import { AuthFormContainer, StyledInput } from "./style";
-import { AuthFormProps } from "../../types/type";
+import { AuthFormProps } from "../../constants/types/type";
 import Button from "../Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
