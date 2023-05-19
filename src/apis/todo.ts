@@ -31,30 +31,36 @@ export const uploadImages = async ( images: File) => {
     }
   };
 
-export const createTodo= async (text:string, checked:boolean, images:string[]|null|File) => {
+export const createTodo= async (text:string, checked:boolean, images:string[]) => {
     try {
         const newTodo = {
             text: text,
             checked: checked,
             images: images
           };
-        await axiosInstance.post('/todo',newTodo,{headers:headers})
+        const response =await axiosInstance.post('/todo',newTodo,{headers:headers})
+        const {message}= response.data;
+        if(message==='실패'){
+            alert('todo 저장에 실패하였습니다.')
+        }
     } catch (error) {
         console.error(error)
     }
 }
 
-export const updateTodo = async () => {
+export const updateTodo = async (id:number) => {
     try {
-        await axiosInstance.put('/todo')
+        await axiosInstance.put(`/todo/${id}`,{headers:headers})
     } catch (error) {
         console.error(error)
     }
 }
 
-export const deleteTodo = async () => {
+export const deleteTodo = async (id:number) => {
     try {
-        await axiosInstance.delete('/todo')
+        const response =await axiosInstance.delete(`/todo/${id}`,{headers:headers});
+        const {message}= response.data;
+        return message;
     } catch (error) {
         console.error(error);
     }

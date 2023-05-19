@@ -10,6 +10,7 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
   const [imgFiles, setImgFiles] = useState<File | null>(null);
   const [checked, setChecked] = useState(false);
   const [previewImg, setPreviewImg] = useState("");
+  const [imageUrls, setImageUrls] = useState([]);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
@@ -30,22 +31,27 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
   useEffect(() => {
     if (imgFiles) {
       uploadImages(imgFiles).then((data) => {
-        console.dir(data);
+        setImageUrls(data);
       });
     }
   }, [imgFiles]);
 
-  const handleCreateTodo = async () => {
+  const onSubmitTodo = async () => {
     if (!text) {
       alert("내용을 입력해주세요.");
       return;
     }
     try {
+      await createTodo(text, checked, imageUrls);
       onCloseModal();
     } catch (error) {
       console.error(error);
       alert("Todo 작성에 실패했습니다.");
     }
+  };
+  const removeImg = () => {
+    setPreviewImg("");
+    setImgFiles(null);
   };
 
   return (
@@ -63,10 +69,14 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
         id="img"
       />
       {previewImg && (
-        <img width={200} height={250} src={previewImg} alt="미리보기" />
+        <div>
+          <img width={200} height={250} src={previewImg} alt="미리보기" />
+          <button>사진 변경</button>
+          <button onClick={() => removeImg}>사진 지우기</button>
+        </div>
       )}
       <label htmlFor="img">사진 첨부하기</label>
-      <Button onClick={handleCreateTodo}>작성완료</Button>
+      <Button onClick={onSubmitTodo}>작성완료</Button>
     </Modal>
   );
 };
