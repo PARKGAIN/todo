@@ -1,7 +1,7 @@
 import { ButtonProps } from "../../types/type";
 import { StyledButton } from "./style";
 
-const Button: React.FC<ButtonProps & { onClick: () => void }> = ({
+const Button: React.FC<ButtonProps & { onClick?: () => void }> = ({
   children,
   type = "button",
   onClick,

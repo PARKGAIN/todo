@@ -41,7 +41,7 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
       formData.append("file", file);
     }
     try {
-      await createTodo(formData);
+      await createTodo({ text: text, checked: false, images: [""] });
       onCloseModal();
     } catch (error) {
       console.error(error);
@@ -63,7 +63,7 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
         onChange={handleFileChange}
         id="img"
       />
-      {previewUrl && <img src={previewUrl} alt="미리보기" />}
+      {previewUrl && <img height={30} src={previewUrl} alt="미리보기" />}
       <label htmlFor="img">사진 첨부하기</label>
       <Button onClick={handleCreateTodo}>작성완료</Button>
     </Modal>

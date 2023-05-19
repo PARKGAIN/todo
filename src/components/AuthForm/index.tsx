@@ -92,7 +92,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
         )}
       </form>
       {mismatchError && <div>비밀번호가 다릅니다.</div>}
-      {signUpSuccess && <div>회원가입되었습니다! 로그인해주세요.</div>}
+      {signUpSuccess && (
+        <div>
+          회원가입되었습니다! <Link to="/">로그인</Link>해주세요.
+        </div>
+      )}
     </AuthFormContainer>
   );
 };

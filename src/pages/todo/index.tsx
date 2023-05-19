@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { loadTodos } from "../../apis/todo";
 import AddTodoModal from "../../components/AddTodoModal";
 import Button from "../../components/Button";
+import TodoItem from "../../components/TodoItem";
 
 const TodoPage = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const TodoPage = () => {
   const onCloseModal = useCallback(() => {
     setShowAddTodoModal(false);
   }, []);
+
   const showTodos = async () => {
     await loadTodos().then((data) => {
       console.dir(data);
@@ -21,7 +23,9 @@ const TodoPage = () => {
   };
   return (
     <div>
+      <h2>Todo List</h2>
       <Button onClick={onClickAddTodoModal}>Todo List 작성하기</Button>
+      <TodoItem />
       <AddTodoModal show={showAddTodoModal} onCloseModal={onCloseModal} />
     </div>
   );
