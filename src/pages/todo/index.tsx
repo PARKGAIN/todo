@@ -29,7 +29,7 @@ const TodoPage = () => {
     <div>
       <h2>Todo List</h2>
       <Button onClick={onClickAddTodoModal}>Todo List 작성하기</Button>
-      {todos.length ? (
+      {todos ? (
         todos.map(({ id, text, images, checked, createdAt }) => {
           return (
             <TodoItem
@@ -38,6 +38,7 @@ const TodoPage = () => {
               images={images}
               checked={checked}
               createdAt={createdAt}
+              setTodos={setTodos}
             />
           );
         })

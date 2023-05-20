@@ -15,7 +15,17 @@ export type UserInput = {
 export type Todos={
   id:number;
   text:string;
-  images?:string[] | undefined;
+  images?:string[]| undefined
   checked:boolean;
   createdAt:string;
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
 }
+
+export type CheckboxProps=  {
+    id: number;
+    text: string;
+    isCompleted: boolean;
+    images?: string[] | undefined;
+    setTodos:React.Dispatch<React.SetStateAction<Todos[]>>
+  }
+
