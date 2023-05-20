@@ -40,10 +40,10 @@ const UpdateTodoForm = ({
         text={text}
         images={images}
       />
-      <ImgInput type="file" defaultValue={images} />
+      {/* <ImgInput type="file" defalutValue={images} /> */}
       <input type="text" value={newTodoText} onChange={onChangeInput} />
       <UpdateButton onClick={() => onSubmitNewTodo()}>제출</UpdateButton>
-      <DeleteButton onClick={() => cancel}>취소</DeleteButton>
+      <DeleteButton onClick={() => cancel()}>취소</DeleteButton>
     </Item>
   );
 };
