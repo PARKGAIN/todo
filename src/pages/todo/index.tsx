@@ -39,13 +39,19 @@ const TodoPage = () => {
               checked={checked}
               createdAt={createdAt}
               setTodos={setTodos}
+              todos={todos}
             />
           );
         })
       ) : (
         <div>todo를 작성해주세요</div>
       )}
-      <AddTodoModal show={showAddTodoModal} onCloseModal={onCloseModal} />
+      <AddTodoModal
+        show={showAddTodoModal}
+        onCloseModal={onCloseModal}
+        todos={todos}
+        setTodos={setTodos}
+      />
     </div>
   );
 };

@@ -17,8 +17,8 @@ export type Todos={
   text:string;
   images?:string[]| undefined
   checked:boolean;
-  createdAt:string;
-  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>
+  createdAt?:string;
+
 }
 
 export type CheckboxProps=  {
@@ -29,3 +29,9 @@ export type CheckboxProps=  {
     setTodos:React.Dispatch<React.SetStateAction<Todos[]>>
   }
 
+  export type AddTodoProps = {
+    show: boolean;
+    onCloseModal: () => void;
+    todos: Todos[];
+    setTodos:React.Dispatch<React.SetStateAction<Todos[]>>;
+  }

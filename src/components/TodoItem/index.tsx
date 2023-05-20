@@ -12,7 +12,11 @@ const TodoItem = ({
   checked,
   createdAt,
   setTodos,
-}: Todos) => {
+  todos,
+}: Todos & {
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>;
+  todos: Todos[];
+}) => {
   return (
     <Item>
       <Checkbox
@@ -26,7 +30,7 @@ const TodoItem = ({
       <img src={BASEURL + `${images}`} height={40} />
       <span>{text}</span>
       <button>수정</button>
-      <DeleteTodoButton id={id} setTodos={setTodos} />
+      <DeleteTodoButton id={id} setTodos={setTodos} todos={todos} />
     </Item>
   );
 };

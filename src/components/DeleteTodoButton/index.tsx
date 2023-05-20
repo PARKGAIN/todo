@@ -5,11 +5,23 @@ import { DeleteButton } from "./style";
 const DeleteTodoButton = ({
   id,
   setTodos,
+  todos,
 }: {
   id: number;
   setTodos: React.Dispatch<React.SetStateAction<Todos[]>>;
+  todos: Todos[];
 }) => {
-  return <DeleteButton onClick={() => deleteTodo(id)}>삭제</DeleteButton>;
+  const removedTodo = [...todos].filter((todo) => todo.id !== id);
+  return (
+    <DeleteButton
+      onClick={() => {
+        deleteTodo(id);
+        setTodos(removedTodo);
+      }}
+    >
+      삭제
+    </DeleteButton>
+  );
 };
 
 export default DeleteTodoButton;

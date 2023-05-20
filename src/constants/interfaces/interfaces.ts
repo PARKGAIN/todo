@@ -1,10 +1,4 @@
-import { ReactNode } from "react";
-
-export interface AddTodoProps {
-    show: boolean;
-    onCloseModal: () => void;
-  }
-
+import { ReactNode} from "react";
  export interface ModalProps {
     show: boolean;
     onCloseModal: () => void;

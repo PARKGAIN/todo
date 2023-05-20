@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react";
 import { createTodo, uploadImages } from "../../apis/todo";
-import { AddTodoProps } from "../../constants/interfaces/interfaces";
+import { AddTodoProps, Todos } from "../../constants/types/type";
 import Button from "../Button";
 import Modal from "../Modal";
 import { ImgInput, StyledTextArea } from "./style";
 
-const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
+const AddTodoModal = ({
+  show,
+  onCloseModal,
+  setTodos,
+  todos,
+}: AddTodoProps) => {
   const [text, setText] = useState("");
   const [imgFiles, setImgFiles] = useState<File | null>(null);
   const [checked, setChecked] = useState(false);
   const [previewImg, setPreviewImg] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState([]);
-
+  const [id, setId] = useState<number>();
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
@@ -42,8 +47,14 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
       return;
     }
     try {
-      await createTodo(text, checked, imageUrls);
+      await createTodo(text, checked, imageUrls).then((id) => {
+        setId(id);
+      });
       onCloseModal();
+      setTodos([
+        ...todos,
+        { id: id!, text: text, checked: checked, images: imageUrls },
+      ] as Todos[]);
     } catch (error) {
       console.error(error);
       alert("Todo 작성에 실패했습니다.");
@@ -78,7 +89,7 @@ const AddTodoModal = ({ show, onCloseModal }: AddTodoProps) => {
           </button>
         </div>
       )}
-      <label htmlFor="img">사진 첨부하기</label>
+      {!previewImg && <label htmlFor="img">사진 첨부하기</label>}
       <Button onClick={onSubmitTodo}>작성완료</Button>
     </Modal>
   );

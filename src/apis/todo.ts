@@ -39,9 +39,11 @@ export const createTodo= async (text:string, checked:boolean, images:string[]) =
             images: images
           };
         const response =await axiosInstance.post('/todo',newTodo,{headers:headers})
-        const {message}= response.data;
+        const {id,message}= response.data;
         if(message==='실패'){
             alert('todo 저장에 실패하였습니다.')
+        }else if(message ==='성공') {
+          return id;
         }
     } catch (error) {
         console.error(error)
