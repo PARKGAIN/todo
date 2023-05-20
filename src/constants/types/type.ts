@@ -15,7 +15,7 @@ export type UserInput = {
 export type Todos={
   id:number;
   text:string;
-  images?:string[];
+  images?:string[] | undefined;
   checked:boolean;
-  createdat:string;
+  createdAt:string;
 }

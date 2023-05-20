@@ -24,11 +24,26 @@ const TodoPage = () => {
       setTodos(data);
     });
   };
+
   return (
     <div>
       <h2>Todo List</h2>
       <Button onClick={onClickAddTodoModal}>Todo List 작성하기</Button>
-      <TodoItem {...todos} />
+      {todos.length ? (
+        todos.map(({ id, text, images, checked, createdAt }) => {
+          return (
+            <TodoItem
+              id={id}
+              text={text}
+              images={images}
+              checked={checked}
+              createdAt={createdAt}
+            />
+          );
+        })
+      ) : (
+        <div>todo를 작성해주세요</div>
+      )}
       <AddTodoModal show={showAddTodoModal} onCloseModal={onCloseModal} />
     </div>
   );
