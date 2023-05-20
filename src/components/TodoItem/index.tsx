@@ -1,4 +1,5 @@
 import * as dayjs from "dayjs";
+import { useState } from "react";
 import { BASEURL } from "../../constants/baseurl";
 import { Todos } from "../../constants/types/type";
 import Checkbox from "../Checkbox";
@@ -17,6 +18,7 @@ const TodoItem = ({
   setTodos: React.Dispatch<React.SetStateAction<Todos[]>>;
   todos: Todos[];
 }) => {
+  const [isUpdate, setIsUpdate] = useState(false);
   return (
     <Item>
       <Checkbox
@@ -27,7 +29,7 @@ const TodoItem = ({
         setTodos={setTodos}
       />
       <span>{dayjs(createdAt).format("HH:mm:ss")}</span>
-      <img src={BASEURL + `${images}`} height={40} />
+      <img src={BASEURL + `${images}`} height={40} alt={""} />
       <span>{text}</span>
       <button>수정</button>
       <DeleteTodoButton id={id} setTodos={setTodos} todos={todos} />
