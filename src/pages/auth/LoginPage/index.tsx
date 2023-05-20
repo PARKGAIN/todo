@@ -1,9 +1,9 @@
 import AuthForm from "../../../components/AuthForm";
 import AuthTemplate from "../../../components/AuthTemplate";
-import { useRedirect } from "../../../hooks/useRedirect";
+import { useRedirectTodo } from "../../../hooks/useRedirectTodo";
 
 const LoginPage = () => {
-  useRedirect();
+  useRedirectTodo();
   return (
     <AuthTemplate>
       <AuthForm type="login" />

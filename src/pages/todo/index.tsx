@@ -19,8 +19,8 @@ const TodoPage = () => {
     setShowAddTodoModal(false);
   }, []);
 
-  const showTodos = async () => {
-    await loadTodos().then((data) => {
+  const showTodos = () => {
+    loadTodos().then((data) => {
       setTodos(data);
     });
   };

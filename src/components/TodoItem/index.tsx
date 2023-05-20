@@ -4,6 +4,8 @@ import { BASEURL } from "../../constants/baseurl";
 import { Todos } from "../../constants/types/type";
 import Checkbox from "../Checkbox";
 import DeleteTodoButton from "../DeleteTodoButton";
+import UpdateTodoButton from "../UpdateTodoButton";
+import UpdateTodoForm from "../UpdateTodoForm";
 import { Item } from "./style";
 
 const TodoItem = ({
@@ -19,7 +21,17 @@ const TodoItem = ({
   todos: Todos[];
 }) => {
   const [isUpdate, setIsUpdate] = useState(false);
-  return (
+
+  return isUpdate ? (
+    <UpdateTodoForm
+      id={id}
+      text={text}
+      isCompleted={checked}
+      images={images}
+      setTodos={setTodos}
+      setIsUpdate={setIsUpdate}
+    />
+  ) : (
     <Item>
       <Checkbox
         id={id}
@@ -31,7 +43,7 @@ const TodoItem = ({
       <span>{dayjs(createdAt).format("HH:mm:ss")}</span>
       <img src={BASEURL + `${images}`} height={40} alt={""} />
       <span>{text}</span>
-      <button>수정</button>
+      <UpdateTodoButton setIsUpdate={setIsUpdate} />
       <DeleteTodoButton id={id} setTodos={setTodos} todos={todos} />
     </Item>
   );

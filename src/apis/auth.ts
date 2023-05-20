@@ -8,12 +8,10 @@ export const login = async (userInput:UserInput) => {
         const {message,token}= response.data;
         if (message === '성공' && token) {
             localStorage.setItem('jwt', token);
-            console.log('로그인 성공');
           } else {
-            console.log('로그인 실패');
+            alert('로그인에 실패하였습니다')
           }
     }catch(error){
-
         console.error(error);
 
         if (error instanceof AxiosError) {
@@ -33,7 +31,7 @@ export const signup= async(userInput:UserInput)=>{
         if (message === '성공' ) {
             console.log('회원가입 성공');
           } else {
-            console.log('회원가입 실패');
+            alert('다시 회원가입 해주세요.');
           }
     } catch (error) {
         console.error(error);

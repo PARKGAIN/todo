@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const useRedirect= () => {
+export const useRedirectToLogin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const accesstoken = localStorage.getItem('jwt');
-    if (accesstoken) navigate('/todo');
+    const token = localStorage.getItem('jwt');
+
+    if (!token) navigate('/');
   }, []);
 };

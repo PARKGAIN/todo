@@ -1,12 +1,12 @@
 import { axiosInstance, headers } from "../constants/axiosInstance";
 
 export const loadTodos = async ()=>{ 
-    try{
-        const response =await axiosInstance.get('/todos',{headers:headers});
-        const {message,todos}= response.data;
-         return todos;
-        } catch(error){
-             console.error(error)
+  try{
+      const response =await axiosInstance.get('/todos',{headers:headers});
+      const {message,todos}= response.data;
+       return todos;
+      } catch(error){
+           console.error(error)
 }}
 
 export const uploadImages = async ( images: File) => {
@@ -60,7 +60,6 @@ export const updateTodo = async (id:number,text:string, checked:boolean, images:
       const response=  await axiosInstance.put(`/todo/${id}`,newTodo,{headers:headers});
       const {message}= response.data;
       return message;
-      // 이거 message로 뭔가 상태값을 변화시킬까?
     } catch (error) {
         console.error(error)
     }

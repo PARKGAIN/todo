@@ -15,5 +15,9 @@ export const StyledInput = styled.input`
   }`;
 
 export const AuthFormContainer= styled.div`
- width: 50%
+ width: 50%;
+ text-align: center;
  `
+export const TodoListHeaderText = styled.h2`
+  color: #1ACAA2;
+`

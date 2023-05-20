@@ -1,4 +1,4 @@
-import { AuthFormContainer, StyledInput } from "./style";
+import { AuthFormContainer, StyledInput, TodoListHeaderText } from "./style";
 import { AuthFormProps } from "../../constants/types/type";
 import Button from "../Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -53,7 +53,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
   return (
     <AuthFormContainer>
-      <h3>{text}</h3>
+      <TodoListHeaderText>{text}</TodoListHeaderText>
       <form onSubmit={onSubmit}>
         <StyledInput
           autoComplete="new-id"
