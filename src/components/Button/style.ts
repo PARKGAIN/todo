@@ -5,4 +5,6 @@ export const StyledButton = styled.button`
   height: 35px;
   line-height: 33px;
   cursor: pointer;
+  margin-top: 17px;
+  margin-bottom: 5px;
 `;
