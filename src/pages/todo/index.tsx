@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { loadTodos } from "../../apis/todo";
 import AddTodoModal from "../../components/AddTodoModal";
+import { TodoListHeaderText } from "../../components/AuthForm/style";
 import Button from "../../components/Button";
 import TodoItem from "../../components/TodoItem";
 import { Todos } from "../../constants/types/type";
@@ -27,7 +28,7 @@ const TodoPage = () => {
 
   return (
     <div>
-      <h2>Todo List</h2>
+      <TodoListHeaderText>Todo List</TodoListHeaderText>
       <Button onClick={onClickAddTodoModal}>Todo List 작성하기</Button>
       {todos ? (
         todos.map(({ id, text, images, checked, createdAt }) => {

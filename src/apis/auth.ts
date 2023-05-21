@@ -8,6 +8,7 @@ export const login = async (userInput:UserInput) => {
         const {message,token}= response.data;
         if (message === '성공' && token) {
             localStorage.setItem('jwt', token);
+            window.location.replace("/todo")
           } else {
             alert('로그인에 실패하였습니다')
           }
@@ -29,7 +30,7 @@ export const signup= async(userInput:UserInput)=>{
         const response =await axiosInstance.post('/signup',userInput);
         const {message}= response.data;
         if (message === '성공' ) {
-            console.log('회원가입 성공');
+          window.location.replace("/")
           } else {
             alert('다시 회원가입 해주세요.');
           }
