@@ -3,7 +3,14 @@ import { createTodo, uploadImages } from "../../apis/todo";
 import { AddTodoProps, Todos } from "../../constants/types/type";
 import Button from "../Buttons";
 import Modal from "../Modal";
-import { AddImgLabel, ImgInput, StyledTextArea } from "./style";
+import {
+  AddImgLabel,
+  CloseModalButton,
+  ImgInput,
+  ImgRemoveButton,
+  ImgUpdateLabel,
+  StyledTextArea,
+} from "./style";
 
 const AddTodoModal = ({
   show,
@@ -16,6 +23,14 @@ const AddTodoModal = ({
   const [previewImg, setPreviewImg] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [id, setId] = useState<number>();
+
+  useEffect(() => {
+    imgFiles
+      ? uploadImages(imgFiles).then((data) => {
+          setImageUrls(data);
+        })
+      : setImageUrls([]);
+  }, [imgFiles]);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
@@ -32,14 +47,6 @@ const AddTodoModal = ({
       reader.readAsDataURL(selectedFile);
     }
   };
-
-  useEffect(() => {
-    imgFiles
-      ? uploadImages(imgFiles).then((data) => {
-          setImageUrls(data);
-        })
-      : setImageUrls([]);
-  }, [imgFiles]);
 
   const onSubmitTodo = () => {
     if (!text) {
@@ -60,7 +67,7 @@ const AddTodoModal = ({
 
   return (
     <Modal show={show} onCloseModal={onCloseModal}>
-      <span onClick={onCloseModal}>X</span>
+      <CloseModalButton onClick={onCloseModal}>ⓧ</CloseModalButton>
       <h2>Todo List 작성하기</h2>
       <StyledTextArea
         placeholder="Todo List 작성"
@@ -76,15 +83,17 @@ const AddTodoModal = ({
       {previewImg && (
         <div>
           <img width={200} height={250} src={previewImg} alt="미리보기" />
-          <label htmlFor="img">사진 변경</label>
-          <button
-            onClick={() => {
-              setPreviewImg(null);
-              setImgFiles(null);
-            }}
-          >
-            사진 지우기
-          </button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <ImgUpdateLabel htmlFor="img">사진 변경</ImgUpdateLabel>
+            <ImgRemoveButton
+              onClick={() => {
+                setPreviewImg(null);
+                setImgFiles(null);
+              }}
+            >
+              사진 지우기
+            </ImgRemoveButton>
+          </div>
         </div>
       )}
       {!previewImg && (
@@ -92,7 +101,9 @@ const AddTodoModal = ({
           <AddImgLabel htmlFor="img">사진 첨부하기</AddImgLabel>
         </div>
       )}
-      <Button onClick={onSubmitTodo}>작성완료</Button>
+      <Button onClick={onSubmitTodo} color={"black"}>
+        작성완료
+      </Button>
     </Modal>
   );
 };

@@ -6,7 +6,7 @@ export const login = async (userInput:UserInput) => {
     try{
         const response= await axiosInstance.post('/login',userInput)
         const {message,token}= response.data;
-        
+
         if (message === '성공' && token) {
             localStorage.setItem('jwt', token);
             window.location.replace("/todo")
@@ -23,7 +23,7 @@ export const login = async (userInput:UserInput) => {
               alert('존재하지 않는 이메일입니다.');
             } else alert('로그인에 실패했습니다. 다시 시도해주세요.');
           }
-        }
+    }
 }
 
 export const signup= async(userInput:UserInput)=>{

@@ -19,4 +19,28 @@ export const AddImgLabel= styled.label`
   line-height: 130px;
   cursor: pointer;
 `
+export const CloseModalButton= styled.span`
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 550px;
+  font-weight: bold;
+  font-size: 17px;
+`
 
+export const ImgUpdateLabel=styled.label`
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+  line-height: 35px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  margin-right: 10px;
+`
+export const ImgRemoveButton= styled.button`
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+  line-height: 35px;
+  border: 1px solid red;
+  color: red;
+`

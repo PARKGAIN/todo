@@ -4,14 +4,16 @@ export const loadTodos = async ()=>{
   try{
       const response =await axiosInstance.get('/todos',{headers:headers});
       const {message,todos}= response.data;
+
       if(message ==='성공'){
         return todos;
       } else if(message==='실패'){
         alert('todo list를 불러오는데 실패하였습니다.')
       }
-      } catch(error){
-        console.error(error)
-}}
+  } catch(error){
+    console.error(error);
+  }
+}
 
 export const uploadImages = async ( images: File) => {
     try {
@@ -21,19 +23,18 @@ export const uploadImages = async ( images: File) => {
       };
         const formData = new FormData();
         formData.append('images', images);
-
         const response =await axiosInstance.post('/images',formData,{headers:imageheader});
         const {message, imageUrls}= response.data;
+
         if(message ==='성공'){
           return imageUrls;
         } else if(message==='실패'){
           alert('이미지를 등록하는데 실패하였습니다')
         }
-      
     } catch (error) {
       console.error(error);
     }
-  };
+};
 
 export const createTodo= async (text:string, checked:boolean, images:string[]) => {
     try {
@@ -52,11 +53,12 @@ export const createTodo= async (text:string, checked:boolean, images:string[]) =
         }
 
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
 }
 
 export const updateTodo = async (id:number,text:string, checked:boolean, images:string[]|undefined) => {
+  console.log(id);
     try {
       const newTodo= {
         text:text,
@@ -67,7 +69,7 @@ export const updateTodo = async (id:number,text:string, checked:boolean, images:
       const {message}= response.data;
       return message;
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
 }
 

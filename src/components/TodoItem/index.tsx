@@ -22,6 +22,10 @@ const TodoItem = ({
 }) => {
   const [isUpdate, setIsUpdate] = useState(false);
 
+  const onImgError = (e: React.ChangeEvent<HTMLImageElement>) => {
+    e.target.style.display = "none";
+  };
+
   return isUpdate ? (
     <UpdateTodoForm
       id={id}
@@ -41,7 +45,7 @@ const TodoItem = ({
         setTodos={setTodos}
       />
       <span>{dayjs(createdAt).format("HH:mm:ss")}</span>
-      <img src={BASEURL + `${images}`} height={40} alt={""} />
+      <img src={BASEURL + `${images}`} height={40} onError={onImgError} />
       <span>{text}</span>
       <div>
         <UpdateTodoButton setIsUpdate={setIsUpdate} />

@@ -31,19 +31,23 @@ const TodoPage = () => {
   return (
     <TodoPageContainer>
       <TodoListHeaderText>Todo List</TodoListHeaderText>
-      <Button onClick={onClickAddTodoModal}>Todo List 작성하기</Button>
+      <Button onClick={onClickAddTodoModal} color={"white"}>
+        Todo List 작성하기
+      </Button>
       {todos ? (
         todos.map(({ id, text, images, checked, createdAt }) => {
           return (
-            <TodoItem
-              id={id}
-              text={text}
-              images={images}
-              checked={checked}
-              createdAt={createdAt}
-              setTodos={setTodos}
-              todos={todos}
-            />
+            <div key={`todo${id}`}>
+              <TodoItem
+                id={id}
+                text={text}
+                images={images}
+                checked={checked}
+                createdAt={createdAt}
+                setTodos={setTodos}
+                todos={todos}
+              />
+            </div>
           );
         })
       ) : (

@@ -82,13 +82,17 @@ const AuthForm = ({ type }: AuthFormProps) => {
         )}
         {type === "login" ? (
           <div>
-            <Button type="submit">로그인</Button>
+            <Button type="submit" color={"black"}>
+              로그인
+            </Button>
             <Link to="register">
-              <Button>회원가입</Button>
+              <Button color={"white"}>회원가입</Button>
             </Link>
           </div>
         ) : (
-          <Button type="submit">회원가입</Button>
+          <Button type="submit" color={"black"}>
+            회원가입
+          </Button>
         )}
       </form>
       {mismatchError && <div>비밀번호가 다릅니다.</div>}
