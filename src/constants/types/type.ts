@@ -1,3 +1,5 @@
+import { ReactNode} from "react";
+
 export type AuthFormProps = {
     type:"register" | "login"
 }
@@ -27,11 +29,17 @@ export type CheckboxProps=  {
     isCompleted: boolean;
     images?: string[] | undefined;
     setTodos:React.Dispatch<React.SetStateAction<Todos[]>>
-  }
+}
 
-  export type AddTodoProps = {
+export type AddTodoProps = {
     show: boolean;
     onCloseModal: () => void;
     todos: Todos[];
     setTodos:React.Dispatch<React.SetStateAction<Todos[]>>;
-  }
+}
+
+export type ModalProps = {
+    show: boolean;
+    onCloseModal: () => void;
+    children: ReactNode;
+}

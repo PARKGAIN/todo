@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { updateTodo } from "../../apis/todo";
-import { CheckboxProps } from "../../constants/types/type";
-import { ImgInput } from "../AddTodoModal/style";
+import { CheckboxProps, Todos } from "../../constants/types/type";
 import Checkbox from "../Checkbox";
 import { DeleteButton } from "../DeleteTodoButton/style";
 import { Item } from "../TodoItem/style";
@@ -26,11 +25,26 @@ const UpdateTodoForm = ({
   };
   const onSubmitNewTodo = () => {
     updateTodo(id, newTodoText, isCompleted, images).then((data) => {
-      if (data === "실패") {
-        alert("todo 수정에 실패하였습니다");
+      if (data === "성공") {
+        setIsUpdate(false);
+        setTodos(updatedTodoList);
+        alert("todo 수정 성공");
+      } else if (data === "실패") {
+        alert("todo를 수정하지 못했습니다");
       }
     });
   };
+  const updatedTodoList = (todos: Todos[]) => {
+    const index = todos.findIndex((prev) => prev.id === id);
+    todos.splice(index, 1, {
+      id: id,
+      text: newTodoText,
+      checked: isCompleted,
+      images: images,
+    });
+    return [...todos];
+  };
+
   return (
     <Item>
       <Checkbox
@@ -40,7 +54,6 @@ const UpdateTodoForm = ({
         text={text}
         images={images}
       />
-      {/* <ImgInput type="file" defalutValue={images} /> */}
       <input type="text" value={newTodoText} onChange={onChangeInput} />
       <UpdateButton onClick={() => onSubmitNewTodo()}>제출</UpdateButton>
       <DeleteButton onClick={() => cancel()}>취소</DeleteButton>

@@ -4,7 +4,11 @@ export const loadTodos = async ()=>{
   try{
       const response =await axiosInstance.get('/todos',{headers:headers});
       const {message,todos}= response.data;
-       return todos;
+      if(message ==='성공'){
+        return todos;
+      } else if(message==='실패'){
+        alert('todo list를 불러오는데 실패하였습니다.')
+      }
       } catch(error){
            console.error(error)
 }}
@@ -40,11 +44,13 @@ export const createTodo= async (text:string, checked:boolean, images:string[]) =
           };
         const response =await axiosInstance.post('/todo',newTodo,{headers:headers})
         const {id,message}= response.data;
+
         if(message==='실패'){
             alert('todo 저장에 실패하였습니다.')
         }else if(message ==='성공') {
           return id;
         }
+
     } catch (error) {
         console.error(error)
     }

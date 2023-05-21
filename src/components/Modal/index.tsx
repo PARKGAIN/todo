@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { ModalProps } from "../../constants/interfaces/interfaces";
+import { ModalProps } from "../../constants/types/type";
 import { CreateModal, CloseModalButton } from "./style";
 
 const Modal = ({ show, children, onCloseModal }: ModalProps) => {
