@@ -6,6 +6,7 @@ export const login = async (userInput:UserInput) => {
     try{
         const response= await axiosInstance.post('/login',userInput)
         const {message,token}= response.data;
+        
         if (message === '성공' && token) {
             localStorage.setItem('jwt', token);
             window.location.replace("/todo")
@@ -13,7 +14,7 @@ export const login = async (userInput:UserInput) => {
             alert('로그인에 실패하였습니다')
           }
     }catch(error){
-        console.error(error);
+      console.error(error);
 
         if (error instanceof AxiosError) {
             if (error?.response?.status === 401) {
@@ -35,9 +36,10 @@ export const signup= async(userInput:UserInput)=>{
             alert('다시 회원가입 해주세요.');
           }
     } catch (error) {
-        console.error(error);
-        if (error instanceof AxiosError) {
-          if (error?.response?.status === 403) {
+      console.error(error);
+
+      if (error instanceof AxiosError) {
+        if (error?.response?.status === 403) {
             alert('다시 회원가입 해주세요.');
           }
         }

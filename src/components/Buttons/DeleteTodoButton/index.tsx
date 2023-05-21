@@ -1,5 +1,5 @@
-import { deleteTodo } from "../../apis/todo";
-import { Todos } from "../../constants/types/type";
+import { deleteTodo } from "../../../apis/todo";
+import { Todos } from "../../../constants/types/type";
 import { DeleteButton } from "./style";
 
 const DeleteTodoButton = ({

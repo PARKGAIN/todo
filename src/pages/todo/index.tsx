@@ -2,15 +2,17 @@ import { useEffect, useState, useCallback } from "react";
 import { loadTodos } from "../../apis/todo";
 import AddTodoModal from "../../components/AddTodoModal";
 import { TodoListHeaderText } from "../../components/AuthForm/style";
-import Button from "../../components/Button";
+import Button from "../../components/Buttons";
 import TodoItem from "../../components/TodoItem";
 import { Todos } from "../../constants/types/type";
+import { TodoPageContainer } from "./style";
 
 const TodoPage = () => {
   const [todos, setTodos] = useState<Todos[]>([]);
   useEffect(() => {
     showTodos();
   }, []);
+
   const [showAddTodoModal, setShowAddTodoModal] = useState(false);
 
   const onClickAddTodoModal = useCallback(() => {
@@ -27,7 +29,7 @@ const TodoPage = () => {
   };
 
   return (
-    <div>
+    <TodoPageContainer>
       <TodoListHeaderText>Todo List</TodoListHeaderText>
       <Button onClick={onClickAddTodoModal}>Todo List 작성하기</Button>
       {todos ? (
@@ -53,7 +55,7 @@ const TodoPage = () => {
         todos={todos}
         setTodos={setTodos}
       />
-    </div>
+    </TodoPageContainer>
   );
 };
 

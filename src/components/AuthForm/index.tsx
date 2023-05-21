@@ -1,6 +1,6 @@
 import { AuthFormContainer, StyledInput, TodoListHeaderText } from "./style";
 import { AuthFormProps } from "../../constants/types/type";
-import Button from "../Button";
+import Button from "../Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { login, signup } from "../../apis/auth";

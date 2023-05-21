@@ -10,7 +10,7 @@ export const loadTodos = async ()=>{
         alert('todo list를 불러오는데 실패하였습니다.')
       }
       } catch(error){
-           console.error(error)
+        console.error(error)
 }}
 
 export const uploadImages = async ( images: File) => {
@@ -52,7 +52,7 @@ export const createTodo= async (text:string, checked:boolean, images:string[]) =
         }
 
     } catch (error) {
-        console.error(error)
+      console.error(error)
     }
 }
 
@@ -67,7 +67,7 @@ export const updateTodo = async (id:number,text:string, checked:boolean, images:
       const {message}= response.data;
       return message;
     } catch (error) {
-        console.error(error)
+      console.error(error)
     }
 }
 
@@ -77,6 +77,6 @@ export const deleteTodo = async (id:number) => {
         const {message}= response.data;
         return message;
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
 }

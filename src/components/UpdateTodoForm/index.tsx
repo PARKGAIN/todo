@@ -2,9 +2,10 @@ import { useState } from "react";
 import { updateTodo } from "../../apis/todo";
 import { CheckboxProps, Todos } from "../../constants/types/type";
 import Checkbox from "../Checkbox";
-import { DeleteButton } from "../DeleteTodoButton/style";
+import { DeleteButton } from "../Buttons/DeleteTodoButton/style";
 import { Item } from "../TodoItem/style";
-import { UpdateButton } from "../UpdateTodoButton/style";
+import { UpdateButton } from "../Buttons/UpdateTodoButton/style";
+import { UpdateTodoFormInput } from "./style";
 
 const UpdateTodoForm = ({
   id,
@@ -16,7 +17,7 @@ const UpdateTodoForm = ({
 }: CheckboxProps & {
   setIsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [newTodoText, setNewTodoText] = useState("");
+  const [newTodoText, setNewTodoText] = useState(text);
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodoText(e.target.value);
   };
@@ -28,7 +29,6 @@ const UpdateTodoForm = ({
       if (data === "성공") {
         setIsUpdate(false);
         setTodos(updatedTodoList);
-        alert("todo 수정 성공");
       } else if (data === "실패") {
         alert("todo를 수정하지 못했습니다");
       }
@@ -54,9 +54,15 @@ const UpdateTodoForm = ({
         text={text}
         images={images}
       />
-      <input type="text" value={newTodoText} onChange={onChangeInput} />
-      <UpdateButton onClick={() => onSubmitNewTodo()}>제출</UpdateButton>
-      <DeleteButton onClick={() => cancel()}>취소</DeleteButton>
+      <UpdateTodoFormInput
+        type="text"
+        value={newTodoText}
+        onChange={onChangeInput}
+      />
+      <div>
+        <UpdateButton onClick={() => onSubmitNewTodo()}>제출</UpdateButton>
+        <DeleteButton onClick={() => cancel()}>취소</DeleteButton>
+      </div>
     </Item>
   );
 };

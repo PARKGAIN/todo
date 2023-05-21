@@ -3,8 +3,8 @@ import { useState } from "react";
 import { BASEURL } from "../../constants/baseurl";
 import { Todos } from "../../constants/types/type";
 import Checkbox from "../Checkbox";
-import DeleteTodoButton from "../DeleteTodoButton";
-import UpdateTodoButton from "../UpdateTodoButton";
+import DeleteTodoButton from "../Buttons/DeleteTodoButton";
+import UpdateTodoButton from "../Buttons/UpdateTodoButton";
 import UpdateTodoForm from "../UpdateTodoForm";
 import { Item } from "./style";
 
@@ -43,8 +43,10 @@ const TodoItem = ({
       <span>{dayjs(createdAt).format("HH:mm:ss")}</span>
       <img src={BASEURL + `${images}`} height={40} alt={""} />
       <span>{text}</span>
-      <UpdateTodoButton setIsUpdate={setIsUpdate} />
-      <DeleteTodoButton id={id} setTodos={setTodos} todos={todos} />
+      <div>
+        <UpdateTodoButton setIsUpdate={setIsUpdate} />
+        <DeleteTodoButton id={id} setTodos={setTodos} todos={todos} />
+      </div>
     </Item>
   );
 };

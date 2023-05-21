@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { createTodo, uploadImages } from "../../apis/todo";
 import { AddTodoProps, Todos } from "../../constants/types/type";
-import Button from "../Button";
+import Button from "../Buttons";
 import Modal from "../Modal";
-import { ImgInput, StyledTextArea } from "./style";
+import { AddImgLabel, ImgInput, StyledTextArea } from "./style";
 
 const AddTodoModal = ({
   show,
@@ -13,10 +13,10 @@ const AddTodoModal = ({
 }: AddTodoProps) => {
   const [text, setText] = useState("");
   const [imgFiles, setImgFiles] = useState<File | null>(null);
-  const [checked, setChecked] = useState(false);
   const [previewImg, setPreviewImg] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [id, setId] = useState<number>();
+
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
@@ -41,28 +41,26 @@ const AddTodoModal = ({
       : setImageUrls([]);
   }, [imgFiles]);
 
-  const onSubmitTodo = async () => {
+  const onSubmitTodo = () => {
     if (!text) {
       alert("내용을 입력해주세요.");
       return;
     }
-    try {
-      await createTodo(text, checked, imageUrls).then((id) => {
-        setId(id);
-      });
-      onCloseModal();
-      setTodos([
-        ...todos,
-        { id: id!, text: text, checked: checked, images: imageUrls },
-      ] as Todos[]);
-    } catch (error) {
-      console.error(error);
-      alert("Todo 작성에 실패했습니다.");
-    }
+    createTodo(text, false, imageUrls).then((id) => {
+      setId(id);
+    });
+    setTodos([
+      ...todos,
+      { id: id!, text: text, checked: false, images: imageUrls },
+    ] as Todos[]);
+    onCloseModal();
+    setText("");
+    setPreviewImg(null);
   };
 
   return (
     <Modal show={show} onCloseModal={onCloseModal}>
+      <span onClick={onCloseModal}>X</span>
       <h2>Todo List 작성하기</h2>
       <StyledTextArea
         placeholder="Todo List 작성"
@@ -89,7 +87,11 @@ const AddTodoModal = ({
           </button>
         </div>
       )}
-      {!previewImg && <label htmlFor="img">사진 첨부하기</label>}
+      {!previewImg && (
+        <div>
+          <AddImgLabel htmlFor="img">사진 첨부하기</AddImgLabel>
+        </div>
+      )}
       <Button onClick={onSubmitTodo}>작성완료</Button>
     </Modal>
   );
