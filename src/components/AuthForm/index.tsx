@@ -19,7 +19,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
   });
   const [passwordCheck, setPasswordCheck] = useState("");
   const [mismatchError, setMismatchError] = useState(false);
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,7 +44,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
         navigate("/todo");
       } else if (type === "register" && !mismatchError) {
         signup(inputValue);
-        setSignUpSuccess(true);
       }
     },
     [inputValue, mismatchError]

@@ -80,5 +80,6 @@ export const deleteTodo = async (id:number) => {
         return message;
     } catch (error) {
       console.error(error);
+      alert('todo 삭제에 실패했습니다');
     }
 }
